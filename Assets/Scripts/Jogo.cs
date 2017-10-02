@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using NewtonVR;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,10 +12,10 @@ public class Jogo : MonoBehaviour
 	public Touch leftTouch;
 	public Touch rightTouch;
 
-	public GameObject leftHand;
-	public GameObject rightHand;
+	public NVRHand leftHand;
+	public NVRHand rightHand;
 
-	public Transform objetosMaos;
+	public NVRPlayer jogador;
 
 	private enum Fases
 	{
@@ -27,46 +28,110 @@ public class Jogo : MonoBehaviour
 
 	private Fases fase = Fases.ALARME;
 
-	// Rodas
-	public GameObject rodaFrenteEsquerda;
+	public Shader shieldShader;
 
-	public GameObject rodaFrenteDireita;
-	public GameObject rodaTrasEsquerda;
-	public GameObject rodaTrasDireita;
+	public GameObject[] rodas;
+	private List<Material> materialsRodas = new List<Material>();
+	private List<Shader> shadersRodas = new List<Shader>();
+	private List<Color> coresRodas = new List<Color>();
 
-	private GameObject rodaMaoEsquerda;
-	private GameObject rodaMaoDireita;
-	private GameObject rodaSelecionada;
-	private bool pegarRodaDisponivel = false;
-	private GameObject slotRodaSelecionado;
-	private bool rodaPega = false;
+	public RangeFloat rangeRodas;
+	private bool exibindoShaderRodas = false;
+	private bool inverterRangeRodas = false;
+	public Color corShieldRodas;
+	public float duracaoPulsoRodas;
+	internal bool colidindoRodaCarro;
+	internal GameObject novaRodaCarro;
 
 	private void Awake()
 	{
 		instancia = this;
 
-		// Testes com a Roda
 		fase = Fases.RODAS;
-		pegarRodaDisponivel = true;
+	}
+
+	private void Start()
+	{
+		foreach (Transform child in jogador.transform)
+		{
+			if (child.name == "LeftHand" ||
+				child.name == "RightHand" ||
+				child.name == "LeftHand [Physical]" ||
+				child.name == "RightHand [Physical]")
+				DesativarFilhos(child.GetChild(0));
+		}
 	}
 
 	private void Update()
 	{
 		if (fase == Fases.RODAS)
 		{
-			if (pegarRodaDisponivel &&
-				rodaSelecionada &&
-				leftTouch.grip == 1f &&
-				rightTouch.grip == 1f)
+			if (!exibindoShaderRodas &&
+				((leftHand.CurrentlyInteracting && leftHand.CurrentlyInteracting.CompareTag("Roda")) &&
+				(rightHand.CurrentlyInteracting && rightHand.CurrentlyInteracting.CompareTag("Roda"))))
 			{
-				PegarRoda();
+				foreach (GameObject roda in rodas)
+				{
+					MeshRenderer[] meshRenderers = roda.GetComponentsInChildren<MeshRenderer>();
+
+					foreach (MeshRenderer meshRenderer in meshRenderers)
+					{
+						foreach (Material material in meshRenderer.materials)
+						{
+							materialsRodas.Add(material);
+							shadersRodas.Add(material.shader);
+							coresRodas.Add(material.color);
+
+							material.shader = shieldShader;
+							material.color = corShieldRodas;
+						}
+					}
+				}
+
+				exibindoShaderRodas = true;
 			}
-			else if (rodaPega &&
-				slotRodaSelecionado &&
-				leftTouch.grip == 0f &&
-				rightTouch.grip == 0f)
+			else if (exibindoShaderRodas &&
+				(!leftHand.CurrentlyInteracting &&
+				!rightHand.CurrentlyInteracting))
 			{
-				AplicarRoda();
+				int chave = 0;
+
+				foreach (Material material in materialsRodas)
+				{
+					Shader shader = shadersRodas[chave];
+					Color cor = coresRodas[chave];
+
+					material.shader = shader;
+					material.color = cor;
+
+					chave++;
+				}
+
+				exibindoShaderRodas = false;
+			}
+			else if (exibindoShaderRodas)
+			{
+				int chave = 0;
+
+				foreach (GameObject roda in rodas)
+				{
+					if (!roda.GetComponent<LerpMaterial>())
+					{
+						RangeFloat range =
+							inverterRangeRodas
+								?
+							new RangeFloat(rangeRodas.max, rangeRodas.min)
+								:
+							rangeRodas;
+
+						if (chave == 0)
+							inverterRangeRodas = !inverterRangeRodas;
+
+						LerpMaterial.Iniciar(roda, "variavel", "_Strength", range, duracaoPulsoRodas);
+					}
+
+					chave++;
+				}
 			}
 		}
 	}
@@ -74,60 +139,6 @@ public class Jogo : MonoBehaviour
 	public void AlterarEstadoMotor()
 	{
 		controladorCarro.KillOrStartEngine();
-	}
-
-	// Rodas
-
-	private void SelecionarRoda()
-	{
-		Debug.Log("SelecionarRoda");
-
-		rodaSelecionada = rodaMaoEsquerda;
-	}
-
-	private void DesselecionarRoda()
-	{
-		Debug.Log("DesselecionarRoda");
-
-		rodaSelecionada = null;
-	}
-
-	private void PegarRoda()
-	{
-		Debug.Log("PegarRoda");
-
-		pegarRodaDisponivel = false;
-		rodaPega = true;
-
-		rodaSelecionada.transform.SetParent(objetosMaos);
-	}
-
-	private void AplicarRoda()
-	{
-		Debug.Log("AplicarRoda");
-
-		pegarRodaDisponivel = false;
-
-		rodaSelecionada.transform.SetParent(objetosMaos);
-	}
-
-	private void AlterarRodas()
-	{
-		/*
-		 * Fluxo da Experiência de Alteração de Rodas
-		 * - Posicionar o jogador para a área específica.
-		 * - Ele pode apontar para a área ou apertar um botão para teleportar.
-		 * - Quando estiver na área, as rodas devem começar a emitir um efeito
-		 * para o jogador saber que deve pegá-las.
-		 * - O jogador deverá encostar as mãos na roda, apertar o botão de grip
-		 * - A partir disso, a roda fica na mão dele.
-		 * - Automaticamente as rodas atuais do veículo ficam com o efeito
-		 * de shield.
-		 * - O jogador deverá colocar a roda da sua mão em cima da roda do
-		 * carro e soltar o grip (dedo do meio).
-		 * - O grip dos dois controles deverá ser pressionado.
-		 * - Quando soltar o grip, a roda irá ficar no lugar demarcado.
-		 */
 	}
 
 	private void AlterarPintura()
@@ -143,81 +154,22 @@ public class Jogo : MonoBehaviour
 		 */
 	}
 
-	private Touch PegarTouch(GameObject objeto)
+	public void FinalizarInteracao()
 	{
-		if (objeto == leftHand)
-			return leftTouch;
-		else
-			return rightTouch;
-	}
-
-	public void IniciarColisao(GameObject objeto, Collider collider)
-	{
-		if (fase == Fases.RODAS)
+		if (colidindoRodaCarro)
 		{
-			if (pegarRodaDisponivel && collider.CompareTag("Roda"))
+			foreach (GameObject roda in rodas)
 			{
-				Debug.Log("IniciarColisao - pegarRodaDisponivel");
-
-				Touch touch = PegarTouch(objeto);
-
-				if (touch == leftTouch)
-					rodaMaoEsquerda = collider.gameObject;
-				else if (touch == rightTouch)
-					rodaMaoDireita = collider.gameObject;
-
-				if (rodaMaoEsquerda && rodaMaoDireita)
-					SelecionarRoda();
-				else
-					DesselecionarRoda();
+				roda.GetComponent<MeshFilter>().mesh = novaRodaCarro.GetComponent<Roda>().meshFilter.mesh;
 			}
+
+			novaRodaCarro.SetActive(false);
 		}
 	}
 
-	public void ProcessarColisao(GameObject objeto, Collider collider)
+	private void DesativarFilhos(Transform destino)
 	{
-		if (fase == Fases.RODAS)
-		{
-			if (rodaPega && collider.CompareTag("Roda"))
-			{
-				Debug.Log("ProcessarColisao - rodaPega");
-
-				if (collider.gameObject == rodaFrenteEsquerda ||
-					collider.gameObject == rodaFrenteDireita ||
-					collider.gameObject == rodaTrasEsquerda ||
-					collider.gameObject == rodaTrasDireita)
-					slotRodaSelecionado = collider.gameObject;
-			}
-		}
-	}
-
-	public void EncerrarColisao(GameObject objeto, Collider collider)
-	{
-		if (fase == Fases.RODAS)
-		{
-			if (pegarRodaDisponivel && collider.CompareTag("Roda"))
-			{
-				Debug.Log("EncerrarColisao - pegarRodaDisponivel");
-
-				Touch touch = PegarTouch(objeto);
-
-				if (touch == leftTouch)
-					rodaMaoEsquerda = null;
-				else if (touch == rightTouch)
-					rodaMaoDireita = null;
-
-				DesselecionarRoda();
-			}
-			else if (rodaPega && collider.CompareTag("Roda"))
-			{
-				Debug.Log("EncerrarColisao - rodaPega");
-
-				if (collider.gameObject == rodaFrenteEsquerda ||
-					collider.gameObject == rodaFrenteDireita ||
-					collider.gameObject == rodaTrasEsquerda ||
-					collider.gameObject == rodaTrasDireita)
-					slotRodaSelecionado = null;
-			}
-		}
+		foreach (Transform child in destino)
+			child.gameObject.SetActive(false);
 	}
 }
