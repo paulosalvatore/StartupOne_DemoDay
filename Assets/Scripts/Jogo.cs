@@ -29,6 +29,7 @@ public class Jogo : MonoBehaviour
 
 	// Rodas
 	public GameObject rodaFrenteEsquerda;
+
 	public GameObject rodaFrenteDireita;
 	public GameObject rodaTrasEsquerda;
 	public GameObject rodaTrasDireita;
@@ -154,10 +155,10 @@ public class Jogo : MonoBehaviour
 	{
 		if (fase == Fases.RODAS)
 		{
-			Debug.Log("IniciarColisao - Rodas");
-
-			if (pegarRodaDisponivel)
+			if (pegarRodaDisponivel && collider.CompareTag("Roda"))
 			{
+				Debug.Log("IniciarColisao - pegarRodaDisponivel");
+
 				Touch touch = PegarTouch(objeto);
 
 				if (touch == leftTouch)
@@ -177,10 +178,10 @@ public class Jogo : MonoBehaviour
 	{
 		if (fase == Fases.RODAS)
 		{
-			Debug.Log("ProcessarColisao - Rodas");
-
-			if (rodaPega)
+			if (rodaPega && collider.CompareTag("Roda"))
 			{
+				Debug.Log("ProcessarColisao - rodaPega");
+
 				if (collider.gameObject == rodaFrenteEsquerda ||
 					collider.gameObject == rodaFrenteDireita ||
 					collider.gameObject == rodaTrasEsquerda ||
@@ -194,19 +195,23 @@ public class Jogo : MonoBehaviour
 	{
 		if (fase == Fases.RODAS)
 		{
-			Debug.Log("EncerrarColisao - Rodas");
-
-			if (pegarRodaDisponivel)
+			if (pegarRodaDisponivel && collider.CompareTag("Roda"))
 			{
+				Debug.Log("EncerrarColisao - pegarRodaDisponivel");
+
 				Touch touch = PegarTouch(objeto);
 
 				if (touch == leftTouch)
 					rodaMaoEsquerda = null;
 				else if (touch == rightTouch)
 					rodaMaoDireita = null;
+
+				DesselecionarRoda();
 			}
-			else if (rodaPega)
+			else if (rodaPega && collider.CompareTag("Roda"))
 			{
+				Debug.Log("EncerrarColisao - rodaPega");
+
 				if (collider.gameObject == rodaFrenteEsquerda ||
 					collider.gameObject == rodaFrenteDireita ||
 					collider.gameObject == rodaTrasEsquerda ||
