@@ -193,6 +193,14 @@ public class LerpMaterial : MonoBehaviour
 			case "cor":
 				return material.color;
 
+			case "corSpecular":
+				Color corSpecular = material.GetColor("_SpecColor");
+				return new Vector4(corSpecular.r, corSpecular.g, corSpecular.b, corSpecular.a);
+
+			case "corEmission":
+				Color corEmission = material.GetColor("_EmissionColor");
+				return new Vector4(corEmission.r, corEmission.g, corEmission.b, corEmission.a);
+
 			default:
 				return Vector4.zero;
 		}
@@ -249,6 +257,46 @@ public class LerpMaterial : MonoBehaviour
 						forcarValor,
 						porcentagemCompleta
 					);
+
+				break;
+
+			case "corSpecular":
+				Vector4 lerpSpec =
+					Vector4.Lerp(
+						inicioMaterial,
+						forcarValor,
+						porcentagemCompleta
+					);
+
+				material.SetColor(
+					"_SpecColor",
+					new Color(
+						lerpSpec.x,
+						lerpSpec.y,
+						lerpSpec.z,
+						lerpSpec.w
+					)
+				);
+
+				break;
+
+			case "corEmission":
+				Vector4 lerpEmission =
+					Vector4.Lerp(
+						inicioMaterial,
+						forcarValor,
+						porcentagemCompleta
+					);
+
+				material.SetColor(
+					"_EmissionColor",
+					new Color(
+						lerpEmission.x,
+						lerpEmission.y,
+						lerpEmission.z,
+						lerpEmission.w
+					)
+				);
 
 				break;
 

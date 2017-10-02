@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Roda : MonoBehaviour
 {
-	public MeshFilter meshFilter;
-
 	private void OnTriggerStay(Collider collider)
 	{
 		if (collider.name.Contains("Wheel"))

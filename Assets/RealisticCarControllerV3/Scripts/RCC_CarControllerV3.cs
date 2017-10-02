@@ -26,12 +26,14 @@ public class RCC_CarControllerV3 : MonoBehaviour
 
 	// Wheel Transforms Of The Vehicle.
 	public Transform FrontLeftWheelTransform;
+
 	public Transform FrontRightWheelTransform;
 	public Transform RearLeftWheelTransform;
 	public Transform RearRightWheelTransform;
 
 	// Wheel Colliders Of The Vehicle.
 	public RCC_WheelCollider FrontLeftWheelCollider;
+
 	public RCC_WheelCollider FrontRightWheelCollider;
 	public RCC_WheelCollider RearLeftWheelCollider;
 	public RCC_WheelCollider RearRightWheelCollider;
@@ -41,6 +43,7 @@ public class RCC_CarControllerV3 : MonoBehaviour
 
 	// Extra Wheels. In case of if your vehicle has extra wheels.
 	public Transform[] ExtraRearWheelsTransform;
+
 	public RCC_WheelCollider[] ExtraRearWheelsCollider;
 
 	public bool applyEngineTorqueToExtraRearWheelColliders = true;      //Applies Engine Torque To Extra Rear Wheels.
@@ -77,6 +80,7 @@ public class RCC_CarControllerV3 : MonoBehaviour
 
 	[Range(.75f, 2f)]
 	public float engineInertia = 1f;
+
 	public bool useRevLimiter = true;
 	public bool useExhaustFlame = true;
 
@@ -100,10 +104,12 @@ public class RCC_CarControllerV3 : MonoBehaviour
 
 	// Gears.
 	public int currentGear = 0;     // Current Gear Of The Vehicle.
+
 	public int totalGears = 6;          // Total Gears Of The Vehicle.
 
 	[Range(0f, .5f)]
 	public float gearShiftingDelay = .35f;
+
 	public bool changingGear = false;       // Changing Gear Currently.
 	public int direction = 1;       // Reverse Gear Currently.
 
@@ -113,6 +119,7 @@ public class RCC_CarControllerV3 : MonoBehaviour
 
 	// AudioSources and AudioClips.
 	private AudioSource engineStartSound;
+
 	public AudioClip engineStartClip;
 	internal AudioSource engineSoundOn;
 	public AudioClip engineClipOn;
@@ -255,6 +262,7 @@ public class RCC_CarControllerV3 : MonoBehaviour
 
 	// Lights.
 	public bool lowBeamHeadLightsOn = false;        // Low Beam Head Lights.
+
 	public bool highBeamHeadLightsOn = false;       // High Beam Head Lights.
 
 	// For Indicators.
@@ -291,6 +299,7 @@ public class RCC_CarControllerV3 : MonoBehaviour
 
 	// Used for Angular and Linear Steering Helper.
 	private Vector3 localVector;
+
 	private Quaternion rot = Quaternion.identity;
 	private float oldRotation;
 	public Transform velocityDirection;
@@ -301,6 +310,7 @@ public class RCC_CarControllerV3 : MonoBehaviour
 
 	// Driving Assistances.
 	public bool ABS = true;
+
 	public bool TCS = true;
 	public bool ESP = true;
 	public bool steeringHelper = true;
@@ -333,24 +343,29 @@ public class RCC_CarControllerV3 : MonoBehaviour
 
 	// Is Driving Assistance is in action now?
 	public bool ABSAct = false;
+
 	public bool TCSAct = false;
 	public bool ESPAct = false;
 
 	// ESP Bools
 	public bool overSteering = false;
+
 	public bool underSteering = false;
 
 	// Drift Variables
 	internal float driftAngle = 0f;
+
 	internal bool driftingNow = false;
 	private bool applyCounterSteering = true;       // Applies counter steering when vehicle is drifting. It helps to keep the control fine of the vehicle.
 
 	// Cambers
 	public float frontCamber = 0f;
+
 	public float rearCamber = 0f;
 
 	// Used For ESP
 	public float frontSlip = 0f;
+
 	public float rearSlip = 0f;
 
 	private WheelCollider anyWheel;
