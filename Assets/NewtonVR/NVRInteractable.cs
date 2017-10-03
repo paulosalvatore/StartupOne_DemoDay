@@ -22,6 +22,7 @@ namespace NewtonVR
 		public bool EnableKinematicOnDetach = false;
 		public float DropDistance = 1;
 		public bool DropReturnStartPosition;
+		public bool CollisionReturnStartPosition;
 
 		public bool EnableGravityOnDetach = true;
 
@@ -218,8 +219,6 @@ namespace NewtonVR
 				foreach (Collider collider in Colliders)
 					collider.isTrigger = false;
 			}
-
-			Jogo.instancia.FinalizarInteracao();
 		}
 
 		protected virtual void DroppedBecauseOfDistance(NVRHand hand)
@@ -249,6 +248,15 @@ namespace NewtonVR
 		{
 			ForceDetach();
 			NVRInteractables.Deregister(this);
+		}
+
+		private void OnCollisionEnter(Collision collision)
+		{
+			if (CollisionReturnStartPosition && AttachedHands.Count == 0)
+			{
+				transform.position = startPosition;
+				transform.rotation = startRotation;
+			}
 		}
 	}
 }

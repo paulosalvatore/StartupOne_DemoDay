@@ -5,11 +5,16 @@ using UnityEngine;
 
 public class Jogo : MonoBehaviour
 {
+	// Básicos
+
 	public static Jogo instancia;
 
 	public RCC_CarControllerV3 controladorCarro;
 
+	// Controles, Mãos e Jogador
+
 	public Touch leftTouch;
+
 	public Touch rightTouch;
 
 	public NVRHand leftHand;
@@ -19,17 +24,21 @@ public class Jogo : MonoBehaviour
 
 	public NVRPlayer jogador;
 
+	// Fases
+
 	private enum Fases
 	{
 		ALARME,
 		PINTURA,
-		PORTA_MALAS,
 		RODAS
 	};
 
 	private Fases fase;
+	public List<GameObject> fasesPontos;
+	private Fases proximaFase;
 
 	// Alarme
+
 	public GameObject controleCarro;
 
 	private bool carroAberto = false;
@@ -61,7 +70,11 @@ public class Jogo : MonoBehaviour
 	internal bool colidindoRodaCarro;
 	internal GameObject novaRodaCarro;
 
+	// Shader
+
 	public Shader shieldShader;
+
+	// Métodos Nativos
 
 	private void Awake()
 	{
@@ -74,7 +87,9 @@ public class Jogo : MonoBehaviour
 	{
 		CarregarLataria();
 
-		//AlterarFase(Fases.ALARME);
+		Invoke("IniciarJogo", 5f);
+
+		MoverJogadorPosicaoInicial();
 	}
 
 	private void Update()
@@ -182,15 +197,33 @@ public class Jogo : MonoBehaviour
 		}
 	}
 
+	// Início do Jogo/Fases
+
+	private void IniciarJogo()
+	{
+		AlterarFase(Fases.ALARME);
+	}
+
+	private void MoverJogadorPosicaoInicial()
+	{
+		jogador.transform.position = fasesPontos[0].transform.position;
+	}
+
 	private void AlterarFase(Fases _fase)
 	{
 		fase = _fase;
+
+		DesativarPontosFases();
 
 		if (fase == Fases.ALARME)
 		{
 			controleCarro.SetActive(true);
 
-			ovrAvatar.ShowControllers(true);
+			ovrAvatar.ShowRightController(true);
+
+			proximaFase = Fases.PINTURA;
+
+			Invoke("PrepararFase", 10f);
 		}
 		else if (fase == Fases.PINTURA)
 		{
@@ -208,6 +241,29 @@ public class Jogo : MonoBehaviour
 			}
 		}
 	}
+
+	private void PrepararFase()
+	{
+		if (proximaFase == Fases.PINTURA)
+		{
+			fasesPontos[1].SetActive(true);
+		}
+		else if (proximaFase == Fases.RODAS)
+		{
+			fasesPontos[2].SetActive(true);
+		}
+	}
+
+	private void DesativarPontosFases()
+	{
+		foreach (GameObject objeto in fasesPontos)
+		{
+			if (objeto.activeSelf)
+				objeto.SetActive(false);
+		}
+	}
+
+	// Controles
 
 	private void ChecarTouchVR()
 	{
@@ -227,6 +283,8 @@ public class Jogo : MonoBehaviour
 			}
 		}
 	}
+
+	// Carro
 
 	private void AbrirCarro()
 	{
@@ -289,34 +347,6 @@ public class Jogo : MonoBehaviour
 		controladorCarro.KillOrStartEngine();
 	}
 
-	public void FinalizarInteracao()
-	{
-		if (colidindoRodaCarro)
-		{
-			foreach (GameObject roda in rodas)
-			{
-				roda.GetComponent<MeshFilter>().mesh = novaRodaCarro.GetComponent<MeshFilter>().mesh;
-				roda.GetComponent<MeshRenderer>().materials = novaRodaCarro.GetComponent<MeshRenderer>().materials;
-				roda.transform.localScale = novaRodaCarro.transform.localScale;
-
-				Vector3 rotacao = roda.transform.localEulerAngles;
-
-				if (roda.name.Contains("FL"))
-					rotacao.y = 0;
-				else if (roda.name.Contains("FR"))
-					rotacao.y = 180f;
-				else if (roda.name.Contains("RL"))
-					rotacao.y = 0;
-				else if (roda.name.Contains("RR"))
-					rotacao.y = 180f;
-
-				roda.transform.localEulerAngles = rotacao;
-			}
-
-			Destroy(novaRodaCarro);
-		}
-	}
-
 	private void CarregarLataria()
 	{
 		GameObject[] objetos = FindObjectsOfType<GameObject>();
@@ -335,7 +365,14 @@ public class Jogo : MonoBehaviour
 		}
 	}
 
-	private void AlterarPinturaCarro()
+	public void AlterarPinturaCarro(GameObject objeto)
+	{
+		pinturaSelecionada = objeto;
+
+		AlterarPinturaCarro();
+	}
+
+	public void AlterarPinturaCarro()
 	{
 		Material material = pinturaSelecionada.GetComponent<MeshRenderer>().material;
 
@@ -371,6 +408,36 @@ public class Jogo : MonoBehaviour
 		}
 	}
 
+	// Processamento de Eventos Básicos e Colisões
+
+	public void FinalizarInteracao()
+	{
+		if (colidindoRodaCarro)
+		{
+			foreach (GameObject roda in rodas)
+			{
+				roda.GetComponent<MeshFilter>().mesh = novaRodaCarro.GetComponent<MeshFilter>().mesh;
+				roda.GetComponent<MeshRenderer>().materials = novaRodaCarro.GetComponent<MeshRenderer>().materials;
+				roda.transform.localScale = novaRodaCarro.transform.localScale;
+
+				Vector3 rotacao = roda.transform.localEulerAngles;
+
+				if (roda.name.Contains("FL"))
+					rotacao.y = 0;
+				else if (roda.name.Contains("FR"))
+					rotacao.y = 180f;
+				else if (roda.name.Contains("RL"))
+					rotacao.y = 0;
+				else if (roda.name.Contains("RR"))
+					rotacao.y = 180f;
+
+				roda.transform.localEulerAngles = rotacao;
+			}
+
+			Destroy(novaRodaCarro);
+		}
+	}
+
 	public void ProcessarTriggerEnter(NVRHand hand, Collider collider)
 	{
 	}
@@ -401,7 +468,7 @@ public class Jogo : MonoBehaviour
 
 	// Métodos Estáticos
 
-	static public void ReproduzirAudio(AudioClip clip = null)
+	public static void ReproduzirAudio(AudioClip clip = null)
 	{
 		if (clip == null)
 			return;
