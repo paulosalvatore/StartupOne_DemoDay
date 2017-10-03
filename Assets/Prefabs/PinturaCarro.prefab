@@ -131,7 +131,7 @@ MonoBehaviour:
   EnableKinematicOnDetach: 0
   DropDistance: 1
   DropReturnStartPosition: 0
-  CollisionReturnStartPosition: 0
+  CollisionReturnStartPosition: 1
   EnableGravityOnDetach: 1
   AttachedHands: []
   InteractionPoint: {fileID: 0}

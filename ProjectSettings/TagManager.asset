@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Roda
   - PinturaCarro
+  - Driver
   layers:
   - Default
   - TransparentFX

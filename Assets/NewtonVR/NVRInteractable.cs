@@ -252,10 +252,16 @@ namespace NewtonVR
 
 		private void OnCollisionEnter(Collision collision)
 		{
-			if (CollisionReturnStartPosition && AttachedHands.Count == 0)
+			if (CollisionReturnStartPosition &&
+				AttachedHands.Count == 0 &&
+				!collision.collider.CompareTag(gameObject.tag))
 			{
+				Rigidbody.isKinematic = true;
+
 				transform.position = startPosition;
 				transform.rotation = startRotation;
+
+				Rigidbody.isKinematic = false;
 			}
 		}
 	}

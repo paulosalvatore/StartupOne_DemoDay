@@ -10,12 +10,10 @@ public class Jogo : MonoBehaviour
 	public static Jogo instancia;
 
 	public RCC_CarControllerV3 controladorCarro;
+	private Vector3 posicaoInicialCarro = Vector3.zero;
+	private Quaternion rotacaoInicialCarro;
 
-	// Controles, Mãos e Jogador
-
-	public Touch leftTouch;
-
-	public Touch rightTouch;
+	// Mãos e Jogador
 
 	public NVRHand leftHand;
 	public NVRHand rightHand;
@@ -26,16 +24,17 @@ public class Jogo : MonoBehaviour
 
 	// Fases
 
-	private enum Fases
+	internal enum Fases
 	{
 		ALARME,
 		PINTURA,
 		RODAS
 	};
 
-	private Fases fase;
+	internal Fases fase;
+	internal Fases proximaFase;
 	public List<GameObject> fasesPontos;
-	private Fases proximaFase;
+	public AudioClip proximaFaseClip;
 
 	// Alarme
 
@@ -89,7 +88,11 @@ public class Jogo : MonoBehaviour
 
 		Invoke("IniciarJogo", 5f);
 
-		MoverJogadorPosicaoInicial();
+		MoverJogador(fasesPontos[0]);
+
+		DesativarPontosFases();
+
+		Invoke("GravarPosicaoCarro", 1f);
 	}
 
 	private void Update()
@@ -103,24 +106,24 @@ public class Jogo : MonoBehaviour
 
 		if (fase == Fases.ALARME)
 		{
-			if (rightTouch.buttonOnePress)
+			if (rightHand.Inputs[NVRButtons.A].PressDown)
 			{
 				LigarCarro();
 			}
-			else if (rightTouch.buttonTwoPress)
+			else if (rightHand.Inputs[NVRButtons.B].PressDown)
 			{
 				AbrirCarro();
 			}
-			else if (rightTouch.buttonStickPress)
+			else if (rightHand.Inputs[NVRButtons.Touchpad].PressDown)
 			{
 				FecharCarro();
 			}
 		}
-		if (fase == Fases.PINTURA)
+		else if (fase == Fases.PINTURA)
 		{
 			if (pinturaSelecionada &&
-				(leftTouch.trigger > 0f ||
-				rightTouch.trigger > 0f))
+				(leftHand.Inputs[NVRButtons.Trigger].SingleAxis > 0f ||
+				rightHand.Inputs[NVRButtons.Trigger].SingleAxis > 0f))
 			{
 				AlterarPinturaCarro();
 			}
@@ -197,6 +200,17 @@ public class Jogo : MonoBehaviour
 		}
 	}
 
+	private void LateUpdate()
+	{
+		if (posicaoInicialCarro != Vector3.zero &&
+			(controladorCarro.transform.position != posicaoInicialCarro ||
+			controladorCarro.transform.rotation != rotacaoInicialCarro))
+		{
+			controladorCarro.transform.position = posicaoInicialCarro;
+			controladorCarro.transform.rotation = rotacaoInicialCarro;
+		}
+	}
+
 	// Início do Jogo/Fases
 
 	private void IniciarJogo()
@@ -204,9 +218,10 @@ public class Jogo : MonoBehaviour
 		AlterarFase(Fases.ALARME);
 	}
 
-	private void MoverJogadorPosicaoInicial()
+	private void MoverJogador(GameObject ponto)
 	{
-		jogador.transform.position = fasesPontos[0].transform.position;
+		jogador.transform.position = ponto.transform.position;
+		jogador.transform.rotation = ponto.transform.rotation;
 	}
 
 	private void AlterarFase(Fases _fase)
@@ -227,12 +242,20 @@ public class Jogo : MonoBehaviour
 		}
 		else if (fase == Fases.PINTURA)
 		{
+			MoverJogador(fasesPontos[1]);
+
 			controleCarro.SetActive(false);
 
 			ovrAvatar.ShowControllers(false);
+
+			proximaFase = Fases.RODAS;
+
+			Invoke("PrepararFase", 20f);
 		}
 		else if (fase == Fases.RODAS)
 		{
+			MoverJogador(fasesPontos[2]);
+
 			GameObject[] rodas = GameObject.FindGameObjectsWithTag("Roda");
 
 			foreach (GameObject roda in rodas)
@@ -252,10 +275,23 @@ public class Jogo : MonoBehaviour
 		{
 			fasesPontos[2].SetActive(true);
 		}
+
+		leftHand.GetComponent<HandPointer>().lineEnabled = true;
+	}
+
+	public void ProximaFase()
+	{
+		ReproduzirAudio(proximaFaseClip);
+
+		leftHand.GetComponent<HandPointer>().lineEnabled = false;
+
+		AlterarFase(proximaFase);
 	}
 
 	private void DesativarPontosFases()
 	{
+		leftHand.GetComponent<HandPointer>().lineEnabled = false;
+
 		foreach (GameObject objeto in fasesPontos)
 		{
 			if (objeto.activeSelf)
@@ -285,6 +321,13 @@ public class Jogo : MonoBehaviour
 	}
 
 	// Carro
+
+	private void GravarPosicaoCarro()
+	{
+		posicaoInicialCarro = controladorCarro.transform.position;
+
+		rotacaoInicialCarro = controladorCarro.transform.rotation;
+	}
 
 	private void AbrirCarro()
 	{
