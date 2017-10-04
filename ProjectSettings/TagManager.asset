@@ -7,6 +7,7 @@ TagManager:
   - Roda
   - PinturaCarro
   - Driver
+  - "Bot\xE3o"
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - 
   - 
   - RCC
-  - 
-  - 
+  - Pintura
+  - PinturaCarro
   - 
   - 
   - 

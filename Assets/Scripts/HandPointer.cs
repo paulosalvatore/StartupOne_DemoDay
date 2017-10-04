@@ -56,7 +56,7 @@ public class HandPointer : MonoBehaviour
 
 				if (hitInfo.transform.CompareTag("Driver"))
 				{
-					Jogo.instancia.ProximaFase();
+					Jogo.instancia.PrepararProximaFase();
 				}
 			}
 			else

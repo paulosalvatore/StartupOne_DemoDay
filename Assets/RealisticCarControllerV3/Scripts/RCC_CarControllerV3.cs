@@ -808,8 +808,8 @@ public class RCC_CarControllerV3 : MonoBehaviour
 		{
 			case RCC_Settings.ControllerType.Keyboard:
 
-				gasInput = Input.GetAxis(RCCSettings.verticalInput);
-				brakeInput = Mathf.Clamp01(-Input.GetAxis(RCCSettings.verticalInput));
+				gasInput = Mathf.Min(1, Input.GetAxis(RCCSettings.verticalInput) * 1.3f);
+				brakeInput = Mathf.Clamp01(-Mathf.Min(1, Input.GetAxis(RCCSettings.verticalInput) * 1.3f));
 				handbrakeInput = Input.GetKey(RCCSettings.handbrakeKB) ? 1f : 0f;
 				steerInput = Input.GetAxis(RCCSettings.horizontalInput);
 				boostInput = Input.GetKey(RCCSettings.boostKB) ? 2.5f : 1f;
