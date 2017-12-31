@@ -43,7 +43,8 @@ namespace NewtonVR
 		[HideInInspector]
 		public GameObject CustomPhysicalColliders;
 
-		private VisibilityLevel CurrentVisibility = VisibilityLevel.Visible;
+		private VisibilityLevel CurrentVisibility;
+		public VisibilityLevel InitialVisibility;
 		private bool VisibilityLocked = false;
 
 		[HideInInspector]
@@ -698,6 +699,11 @@ namespace NewtonVR
 
 		private void SetVisibility(VisibilityLevel visibility)
 		{
+			if (Player.DisableHandsGhostMode && visibility == VisibilityLevel.Ghost)
+			{
+				visibility = VisibilityLevel.Invisible;
+			}
+
 			if (CurrentVisibility != visibility)
 			{
 				if (visibility == VisibilityLevel.Invisible)
@@ -853,6 +859,8 @@ namespace NewtonVR
 			}
 
 			CurrentHandState = HandState.Idle;
+
+			SetVisibility(InitialVisibility);
 		}
 
 		public void ForceGhost()
@@ -866,7 +874,7 @@ namespace NewtonVR
 	{
 		Invisible = 0,
 		Ghost = 70,
-		Visible = 100,
+		Visible = 100
 	}
 
 	public enum HandState
