@@ -30,6 +30,7 @@ namespace NewtonVR
 
 		public InterationStyle InteractionStyle;
 		public bool PhysicalHands = true;
+		public bool DisableHandsGhostMode = true;
 		public bool MakeControllerInvisibleOnInteraction = false;
 		public bool AutomaticallySetControllerTransparency = true;
 		public bool VibrateOnHover = true;
@@ -342,17 +343,17 @@ namespace NewtonVR
 
 		public void ProcessTriggerEnter(NVRHand hand, Collider collider)
 		{
-			Jogo.instancia.ProcessarTriggerEnter(hand, collider);
+			// Jogo.instancia.ProcessarTriggerEnter(hand, collider);
 		}
 
 		public void ProcessTriggerStay(NVRHand hand, Collider collider)
 		{
-			Jogo.instancia.ProcessarTriggerStay(hand, collider);
+			// Jogo.instancia.ProcessarTriggerStay(hand, collider);
 		}
 
 		public void ProcessTriggerExit(NVRHand hand, Collider collider)
 		{
-			Jogo.instancia.ProcessarTriggerExit(hand, collider);
+			// Jogo.instancia.ProcessarTriggerExit(hand, collider);
 		}
 
 #if UNITY_EDITOR
