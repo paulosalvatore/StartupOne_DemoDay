@@ -129,7 +129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &65986889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,9 +144,13 @@ MonoBehaviour:
   Rigidbody: {fileID: 0}
   CanAttach: 1
   AllowTwoHanded: 0
+  TwoHandedOnly: 0
+  DisableCollidersOnAttach: 0
   DisableKinematicOnAttach: 1
   EnableKinematicOnDetach: 0
   DropDistance: 1
+  DropReturnStartPosition: 0
+  CollisionReturnStartPosition: 0
   EnableGravityOnDetach: 1
   AttachedHands: []
   InteractionPoint: {fileID: 0}
@@ -2053,7 +2057,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 168178, guid: 313157ae7bfd1d847991eeb3e682a237, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 313157ae7bfd1d847991eeb3e682a237, type: 2}
@@ -2175,9 +2179,13 @@ MonoBehaviour:
   Rigidbody: {fileID: 2137979649}
   CanAttach: 1
   AllowTwoHanded: 0
+  TwoHandedOnly: 0
+  DisableCollidersOnAttach: 0
   DisableKinematicOnAttach: 1
   EnableKinematicOnDetach: 0
   DropDistance: 1
+  DropReturnStartPosition: 0
+  CollisionReturnStartPosition: 0
   EnableGravityOnDetach: 1
   AttachedHands: []
   InteractionPoint: {fileID: 0}
@@ -2383,7 +2391,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &450721672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2398,9 +2406,13 @@ MonoBehaviour:
   Rigidbody: {fileID: 0}
   CanAttach: 1
   AllowTwoHanded: 0
+  TwoHandedOnly: 0
+  DisableCollidersOnAttach: 0
   DisableKinematicOnAttach: 1
   EnableKinematicOnDetach: 0
   DropDistance: 1
+  DropReturnStartPosition: 0
+  CollisionReturnStartPosition: 0
   EnableGravityOnDetach: 1
   AttachedHands: []
   InteractionPoint: {fileID: 0}
@@ -3697,7 +3709,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 196754, guid: 63dd2b524aab6e94cb6614f5f049cca4, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 63dd2b524aab6e94cb6614f5f049cca4, type: 2}
@@ -6703,7 +6715,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!54 &691609328
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6733,9 +6745,13 @@ MonoBehaviour:
   Rigidbody: {fileID: 0}
   CanAttach: 1
   AllowTwoHanded: 0
+  TwoHandedOnly: 0
+  DisableCollidersOnAttach: 0
   DisableKinematicOnAttach: 1
   EnableKinematicOnDetach: 1
   DropDistance: 1
+  DropReturnStartPosition: 0
+  CollisionReturnStartPosition: 0
   EnableGravityOnDetach: 1
   AttachedHands: []
   InteractionPoint: {fileID: 0}
@@ -6940,7 +6956,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &706793847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6955,9 +6971,13 @@ MonoBehaviour:
   Rigidbody: {fileID: 0}
   CanAttach: 1
   AllowTwoHanded: 0
+  TwoHandedOnly: 0
+  DisableCollidersOnAttach: 0
   DisableKinematicOnAttach: 0
   EnableKinematicOnDetach: 0
   DropDistance: 1
+  DropReturnStartPosition: 0
+  CollisionReturnStartPosition: 0
   EnableGravityOnDetach: 1
   AttachedHands: []
   InteractionPoint: {fileID: 0}
@@ -7199,7 +7219,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000012617773504, guid: 60c015df881d76345b081ea3a54110fb, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 60c015df881d76345b081ea3a54110fb, type: 2}
@@ -7863,7 +7883,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &881831491
 Transform:
   m_ObjectHideFlags: 0
@@ -8315,7 +8335,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &949422243
 Transform:
   m_ObjectHideFlags: 0
@@ -8755,9 +8775,13 @@ MonoBehaviour:
   Rigidbody: {fileID: 2137979649}
   CanAttach: 1
   AllowTwoHanded: 0
+  TwoHandedOnly: 0
+  DisableCollidersOnAttach: 0
   DisableKinematicOnAttach: 1
   EnableKinematicOnDetach: 0
   DropDistance: 1
+  DropReturnStartPosition: 0
+  CollisionReturnStartPosition: 0
   EnableGravityOnDetach: 1
   AttachedHands: []
   InteractionPoint: {fileID: 0}
@@ -8803,7 +8827,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &1022553157
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8901,7 +8925,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1059543858
 Transform:
   m_ObjectHideFlags: 0
@@ -9042,7 +9066,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1091981153
 Transform:
   m_ObjectHideFlags: 0
@@ -10107,7 +10131,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1291961725
 Transform:
   m_ObjectHideFlags: 0
@@ -10859,7 +10883,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &1425348164
 Animator:
   serializedVersion: 3
@@ -11352,7 +11376,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1517552701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11378,9 +11402,13 @@ MonoBehaviour:
   Rigidbody: {fileID: 0}
   CanAttach: 1
   AllowTwoHanded: 0
+  TwoHandedOnly: 0
+  DisableCollidersOnAttach: 0
   DisableKinematicOnAttach: 1
   EnableKinematicOnDetach: 0
   DropDistance: 1
+  DropReturnStartPosition: 0
+  CollisionReturnStartPosition: 0
   EnableGravityOnDetach: 1
   AttachedHands: []
   InteractionPoint: {fileID: 0}
@@ -11965,7 +11993,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1637717687
 Transform:
   m_ObjectHideFlags: 0
@@ -12068,7 +12096,7 @@ Prefab:
       objectReference: {fileID: 535050298}
     - target: {fileID: 128946, guid: 5c5c2eaab005afe40b5d7a9cb6aa2b72, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6543066, guid: 5c5c2eaab005afe40b5d7a9cb6aa2b72, type: 2}
@@ -12192,7 +12220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1662153437
 Transform:
   m_ObjectHideFlags: 0
@@ -12474,7 +12502,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1686087769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12623,7 +12651,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 128946, guid: 5c5c2eaab005afe40b5d7a9cb6aa2b72, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6543066, guid: 5c5c2eaab005afe40b5d7a9cb6aa2b72, type: 2}
@@ -12840,9 +12868,13 @@ MonoBehaviour:
   Rigidbody: {fileID: 0}
   CanAttach: 1
   AllowTwoHanded: 0
+  TwoHandedOnly: 0
+  DisableCollidersOnAttach: 0
   DisableKinematicOnAttach: 1
   EnableKinematicOnDetach: 0
   DropDistance: 3
+  DropReturnStartPosition: 0
+  CollisionReturnStartPosition: 0
   EnableGravityOnDetach: 1
   AttachedHands: []
   CurrentAngle: 0
@@ -13005,7 +13037,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 196754, guid: 63dd2b524aab6e94cb6614f5f049cca4, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 63dd2b524aab6e94cb6614f5f049cca4, type: 2}
@@ -14552,7 +14584,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2092782701
 Transform:
   m_ObjectHideFlags: 0
