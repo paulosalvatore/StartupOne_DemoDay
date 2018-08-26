@@ -1,9 +1,7 @@
 fileFormatVersion: 2
 guid: 94b3eeee5e7cf284d844ce14c6907534
-timeCreated: 1505428618
-licenseType: Free
 ModelImporter:
-  serializedVersion: 21
+  serializedVersion: 23
   fileIDToRecycleName:
     100000: back
     100002: bottom
@@ -1001,10 +999,123 @@ ModelImporter:
     4300266: polySurface648_MeshPart0
     4300268: polySurface648_MeshPart1
     9500000: //RootNode
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BackDownLight
+    second: {fileID: 2100000, guid: 0816856f1f4943d4d82bd55eb978364b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BackLight
+    second: {fileID: 2100000, guid: 4a2ca76574e38584b99c71c574b1d6ba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Black
+    second: {fileID: 2100000, guid: a748158e45433c6408233b68946b2437, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BottonBlack
+    second: {fileID: 2100000, guid: f0879ab98e491a042b48860df00e7db8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Croma
+    second: {fileID: 2100000, guid: 4610641c544f75f49995f0bbb6c6aab1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CromaDoor
+    second: {fileID: 2100000, guid: 9e7274b48accc47469dccc830f360f41, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CromaFrontSublight
+    second: {fileID: 2100000, guid: 6edc448d30f90f34a8233a4a5d58efb6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CromaLogo
+    second: {fileID: 2100000, guid: 18de8132bf3d78e449f51c03d77ac71d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkCroma
+    second: {fileID: 2100000, guid: 815ec7575a4a7f84db3143069ab930f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkPlastic
+    second: {fileID: 2100000, guid: f38e8d1df2616b84cba4f01f3fb9915e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ext
+    second: {fileID: 2100000, guid: 198c6abb7ab23654fb6b4f3d2439ec88, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrontLightGlass
+    second: {fileID: 2100000, guid: 08c60b7fa3ffa664b95e65eedced6f81, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Light
+    second: {fileID: 2100000, guid: 21a6f20307c32e94ebd40a91eb67ee10, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SideLight
+    second: {fileID: 2100000, guid: 3662c08faffe40d4cae2d6d38486dc3e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wheel
+    second: {fileID: 2100000, guid: f1a80a796dd7a5a4384a6a8a0cdd7faf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WheelBlackMetal
+    second: {fileID: 2100000, guid: d3143b8432be69944af5c77de49b579e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WheelCroma
+    second: {fileID: 2100000, guid: 43ed031c482baa1419f8423cb8062d5c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WheelGreyMetal
+    second: {fileID: 2100000, guid: dda14029f6951d747abc32a63bd8c3c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Windows
+    second: {fileID: 2100000, guid: 2ae2ad635fee4da4ca41a08961f4f602, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: frontGlass
+    second: {fileID: 2100000, guid: 7a88d0a3001bb3249a09db884ee321a2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 7c33b74027772cc4d93451f602b5adc5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mirror
+    second: {fileID: 2100000, guid: c935117ac8919d341ae0acfadc1fb415, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -1017,6 +1128,8 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -1041,11 +1154,15 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0

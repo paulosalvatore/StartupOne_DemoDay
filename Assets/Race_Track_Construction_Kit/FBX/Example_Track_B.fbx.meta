@@ -1,8 +1,7 @@
 fileFormatVersion: 2
 guid: 4c4d30f7421f95d4cb7ba9ad383d42a3
-timeCreated: 18446744011573954816
 ModelImporter:
-  serializedVersion: 21
+  serializedVersion: 23
   fileIDToRecycleName:
     100000: Carb_A
     100002: Carb_A1
@@ -4077,10 +4076,93 @@ ModelImporter:
     4301624: Tarmac_Grass_Corner1
     4301626: Tarmac_Grass_Corner2
     9500000: //RootNode
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bark
+    second: {fileID: 2100000, guid: 2705ed8af637c664384a8f8652eba462, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bridge_roof
+    second: {fileID: 2100000, guid: e0f97e84dc6529c4084cb4988eb6eb7d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bridge_wall
+    second: {fileID: 2100000, guid: 677244aa33739e848b0c9a14875062c3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: concrete_wall
+    second: {fileID: 2100000, guid: 641c01ab73be607459289a7f4b8d85db, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: curb
+    second: {fileID: 2100000, guid: 0ac0a30323535b34fbb08f4312ed7ee9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: grass
+    second: {fileID: 2100000, guid: 2a5a03645ed70dc4c91ff03e0bb8a8b3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: efb958e2d3949dc448d1a9fe65119bec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert4
+    second: {fileID: 2100000, guid: 22245d8052982854eba5bcf2260ed95c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal_barrier
+    second: {fileID: 2100000, guid: 1092573c1645b204080d363dcfd0d56b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: outer_fence
+    second: {fileID: 2100000, guid: 649714d59f321ad4abd9e25bfabc492b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: panorama
+    second: {fileID: 2100000, guid: 9573a8bd841e70d4891174b7dd61f787, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: spruce
+    second: {fileID: 2100000, guid: a18f4c0ba29e61d4f9a31cf6e8bf0a87, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tarmac
+    second: {fileID: 2100000, guid: 17d9587ef48b92940a18ffa08ae98209, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tarmac_curve
+    second: {fileID: 2100000, guid: 7d0c62831be2b2242b7972b2bb2029f0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: track1
+    second: {fileID: 2100000, guid: 3854f88359bd2e04e96224286714b600, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: track_finish_line
+    second: {fileID: 2100000, guid: a48f8e22cd142f84b85e0200fd59ce41, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -4093,6 +4175,8 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -4117,11 +4201,15 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 0
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
